@@ -1,0 +1,69 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh; /* Ojo que puede cambiar porque no tenemos en cuenta en navbar */
+}
+
+/* Sidebar */
+main aside{
+    background-color: blueviolet;
+    width: 500px;
+}
+
+/* main content con la mensajeria */
+main section{
+    background-color: green;
+    width: 100%;
+}
+
+
+.messages{
+    display: flex;
+    flex-direction: column;
+}
+
+.messages .messages-header{
+    height: 100px;
+    background-color: royalblue;
+}
+
+.messages .messages-body{
+    height: 100%;
+    background-color: rgb(247, 173, 173);
+    overflow-y: scroll;
+}   
+
+.messages .messages-new-message-form{
+    height: 100px;
+    background-color: rgb(119, 23, 23);
+}
+
+
+.messages .messages-body .message-container .message{
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    min-width: 100px;
+    min-height: 100px;
+    background-color: white;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.messages .messages-body .message-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.messages .messages-body  .message-container-received{
+    justify-content: flex-end;
+}
