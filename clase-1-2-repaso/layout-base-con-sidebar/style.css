@@ -17,6 +17,15 @@ main aside{
     width: 500px;
 }
 
+.sidebar-desktop{
+
+}
+
+.sidebar-mobible{
+    display: none;
+}
+
+
 /* main content con la mensajeria */
 main section{
     background-color: green;
@@ -66,4 +75,21 @@ main section{
 
 .messages .messages-body  .message-container-received{
     justify-content: flex-end;
+}
+
+
+@media screen and (max-width: 768px) {
+    .sidebar-desktop{
+        display: none;
+    }
+    .sidebar-mobible{
+        display: flex;
+        height: 50px;
+
+        width: 100%;
+    }
+    main{
+        flex-direction: column;
+        height: auto;
+    }
 }
