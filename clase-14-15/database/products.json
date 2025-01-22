@@ -1,0 +1,51 @@
+[
+    {
+        "id": 1,
+        "title": "Sillon gamer",
+        "description": "Tiene luces RGB",
+        "price": 25000,
+        "stock": 500
+    },
+    {
+        "id": 2,
+        "title": "Mesada pequeña de madera",
+        "description": "Esta gastada pero aun sirve",
+        "price": 250,
+        "stock": 1
+    },
+    {
+        "id": 3,
+        "title": "Monitor curvo 24\"",
+        "description": "Ideal para juegos y diseño gráfico",
+        "price": 12000,
+        "stock": 200
+    },
+    {
+        "id": 4,
+        "title": "Teclado mecánico",
+        "description": "Con interruptores Cherry MX Brown",
+        "price": 8000,
+        "stock": 100
+    },
+    {
+        "id": 5,
+        "title": "Altavoces Bluetooth",
+        "description": "Con batería recargable y resistencia al agua",
+        "price": 4000,
+        "stock": 300
+    },
+    {
+        "id": 6,
+        "title": "Cámara de seguridad Wi-Fi",
+        "description": "Con visión nocturna y detección de movimiento",
+        "price": 15000,
+        "stock": 50
+    },
+    {
+        "id": 7,
+        "title": "Impresora 3D",
+        "description": "Con resolución de impresión de 100 micrones",
+        "price": 30000,
+        "stock": 20
+    }
+]

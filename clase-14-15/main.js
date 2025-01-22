@@ -12,7 +12,67 @@ app.use(express.json())
 
 app.use('/api/auth', authRouter)
 app.use('/api/users', userRouter)
-app.use('/api/products', productRouter)
+
+/* 
+Route: /api/products
+
+GET /api/products
+Devolver todos los productos
+Response: {
+    message: "Productos obtenidos",
+    ok: true,
+    status: 200,
+    payload: {
+        products: [{productos}]
+    }
+}
+
+GET /api/products/:product_id
+Buscar un producto por id
+Response: 
+Si se encontro:
+{
+    message: "Producto con id {id_buscado} encontrado",
+    ok: true,
+    status:200,
+    payload: {
+        product: {producto_encontrado}
+    }
+}
+
+Si no se encontro:
+{
+    message: "Producto con id {id_buscado} no encontrado",
+    ok: true,
+    status:404
+}
+
+POST /api/products
+Crear un nuevo producto (el id se debe autogenerar y debe ser autoincremental)
+Body: {
+    title: string,
+    description: string,
+    price: number,
+    stock: number
+} 
+Response: {
+    message: "Producto creado",
+    ok: true,
+    status: 201,
+    payload: {
+        product: {producto_creado}
+    }
+}
+
+DELETE /api/products/:product_id
+Eliminar un producto por id
+Response: {
+    message: "Producto con id {id_buscado} eliminado",
+    ok: true,
+    status: 200
+}
+*/
+
 
 
 

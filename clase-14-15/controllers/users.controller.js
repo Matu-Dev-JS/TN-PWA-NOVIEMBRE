@@ -1,5 +1,6 @@
 import filesystem from 'fs'
 import { ServerError } from '../utils/error.util';
+import { deleteUserByEmail, updateUserByEmail } from '../repository/user.repository';
 export const getAllUsersController = async (req, res) => {
     try {
         const data = await filesystem.promises.readFile("./database/users.json");
@@ -51,24 +52,44 @@ export const deleteUserByEmailController = async (req, res) =>{
         if (error.status) {
             return res.send({
                 message: error.message,
+                status: error.status,
+                ok: false
+            })
+        }
+        return res.send({
+            status: 500,
+            message: "Internal server error",
+            ok: false
+        })
+    }
+}
+export const updateUsernameByEmailController = async (req, res) =>{
+    try {
+        const { email } = req.params
+        if (!email) {
+            throw new ServerError('Email is required', 400)
+        }
+        const { username } = req.body
+        if (!username) {
+            throw new ServerError('Username is required', 400)
+        }
+        await updateUserByEmail(email, username)
+        return res.send({
+            status: 200,
+            message: `The username with email: ${email} now is: ${username}`,
+            ok: true
+        })
+    } catch (error) {
+        console.log(`Something went wrong => ${error}`)
+        if (error.status) {
+            return res.send({
+                message: error.message,
                 status: error.status
             })
         }
         return res.send({
             status: 500,
             message: "Internal server error",
-        })
-    }
-}
-export const updateUsernameByEmailController = async (req, res) =>{
-    try{
-        const {email} = req.params
-    }
-    catch(error){
-        return res.send({
-            ok: false,
-            message: 'Internal server error',
-            status: 500
         })
     }
 }
