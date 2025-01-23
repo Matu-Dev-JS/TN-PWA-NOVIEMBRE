@@ -1,5 +1,5 @@
 import filesystem from 'fs'
-import { ServerError } from '../utils/error.util'
+import { ServerError } from '../utils/error.util.js'
 
 
 export const getUsers = async () =>{

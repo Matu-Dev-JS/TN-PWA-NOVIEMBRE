@@ -1,6 +1,6 @@
 import filesystem from 'fs'
-import { ServerError } from '../utils/error.util';
-import { deleteUserByEmail, updateUserByEmail } from '../repository/user.repository';
+import { ServerError } from '../utils/error.util.js';
+import { deleteUserByEmail, updateUserByEmail } from '../repository/user.repository.js';
 export const getAllUsersController = async (req, res) => {
     try {
         const data = await filesystem.promises.readFile("./database/users.json");

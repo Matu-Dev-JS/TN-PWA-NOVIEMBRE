@@ -1,7 +1,7 @@
 import express from 'express';
 import authRouter from './routes/auth.router.js';
 import userRouter from './routes/users.router.js';
-import productRouter from './routes/product.router.js';
+import productsRouter from './routes/products.router.js';
 
 const PORT = 3000
 const app = express()
@@ -12,6 +12,7 @@ app.use(express.json())
 
 app.use('/api/auth', authRouter)
 app.use('/api/users', userRouter)
+app.use('/api/products', productsRouter)
 
 /* 
 Route: /api/products
