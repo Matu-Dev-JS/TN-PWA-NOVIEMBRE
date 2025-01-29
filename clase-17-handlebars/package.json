@@ -1,0 +1,18 @@
+{
+  "name": "clase-17-handlebars",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch ./server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-handlebars": "^8.0.1"
+  }
+}

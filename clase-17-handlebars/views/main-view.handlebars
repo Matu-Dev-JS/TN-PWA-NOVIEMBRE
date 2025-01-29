@@ -1,0 +1,62 @@
+<header>
+    {{#if this.has_notifications}}
+    <span>Notifiaciones nuevas: {{this.notifications}}</span>
+    {{else}}
+    <span>No hay notificaciones nuevas</span>
+    {{/if}}
+</header>
+<main>
+    <aside>
+        <h2>Amigos:</h2>
+        <div>
+            {{#each this.friends}}
+            <div>
+                <h3>{{name}}</h3>
+                <span>
+                    {{#if is_connected}}
+                    Conectado
+                    {{else}}
+                    Desconectado
+                    {{/if}}
+                </span>
+            </div>
+            {{/each}}
+        </div>
+    </aside>
+    <div>
+        <h2>Crea tu pulbicacion</h2>
+        <form action="/posts" method="POST">
+            <div>
+                <label for="title">Titulo</label>
+                <input id="title" name="title" type="text">
+            </div>
+            <div>
+                <label for="text">Contenido</label>
+                <input id="text" name="text" type="text">
+            </div>
+            <button type="submit">Publicar</button>
+        </form>
+
+    </div>
+    <div>
+        {{#each this.posts}}
+        <a href="/posts/{{id}}">
+            <h2>Usuario {{id}} posteo</h2>
+            <h2>Titulo: {{title}}</h2>
+            <h3>Texto: {{text}}</h3>
+            <span>Likes: {{likes}} and Retweets: {{retweets}}</span>
+            <button>Like</button>
+            <h2>Comentarios</h2>
+            <ul>
+                {{#each comments}}
+                <h3>ID: {{id}}</h3>
+                <h3>Nombre: {{name}}</h3>
+                <span>Texto: {{text}}</span>
+                <span>Likes: {{likes}}</span>
+                <button>Like</button>
+                {{/each}}
+            </ul>
+        </a>
+        {{/each}}
+    </div>
+</main>
