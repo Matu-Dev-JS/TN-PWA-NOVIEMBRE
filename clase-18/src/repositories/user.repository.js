@@ -1,4 +1,4 @@
-import User from "../models/User.model.js";
+import User, { USER_PROPS } from "../models/User.model.js";
 import { ServerError } from "../utils/errors.utils.js";
 
 class UserRepository {
@@ -9,7 +9,12 @@ class UserRepository {
         verification_token
     }){
         try{
-            await User.create({username, email, password, verification_token})
+            await User.create({
+                [USER_PROPS.USERNAME]: username, 
+                [USER_PROPS.EMAIL]: email, 
+                [USER_PROPS.PASSWORD]: password, 
+                [USER_PROPS.VERIFICATION_TOKEN]:verification_token
+            })
         }
         catch(error){
             console.log(error)
