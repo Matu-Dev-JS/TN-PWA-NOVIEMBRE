@@ -35,8 +35,3 @@ app.listen(ENVIROMENT.PORT, () =>{
     console.log(`El servidor se esta ejecutando en http://localhost:${ENVIROMENT.PORT}`)
 })
 
-sendMail({
-    to: 'mati.dev.gimenez@gmail.com',
-    html: '<h1>Hola desde node JS</h1>',
-    subject: 'Probando nodemailer'
-})
