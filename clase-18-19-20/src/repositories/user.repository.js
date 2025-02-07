@@ -43,6 +43,10 @@ class UserRepository {
         await user_found.save()
         return user_found
     }
+
+    async findUserByEmail (email){
+        return await User.findOne({[USER_PROPS.EMAIL]: email})
+    }
 }
 
 

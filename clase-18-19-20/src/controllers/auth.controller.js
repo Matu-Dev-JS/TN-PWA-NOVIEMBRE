@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken'
 import ENVIROMENT from "../config/enviroment.config.js";
 import { sendMail } from "../utils/mailer.utils.js";
+
 export const registerController = async (req, res) => {
     try {
         const { username, email, password } = req.body;
@@ -81,6 +82,56 @@ export const verifyEmailController = async (req, res) => {
         const {email} = payload
         const user_found = await UserRepository.verifyUserByEmail(email)
         res.redirect(ENVIROMENT.URL_FRONTEND + '/login')
+    } catch (error) {
+        console.log("error al registrar", error);
+
+        if (error.status) {
+            return res.send({
+                ok: false,
+                status: error.status,
+                message: error.message
+            });
+        }
+
+        res.send({
+            status: 500,
+            ok: false,
+            message: "internal server error"
+        });
+    }
+}
+
+export const loginController = async (req, res) => {
+    try{    
+        const {email, password} = req.body
+        const user_found = await UserRepository.findUserByEmail(email)
+        if(!user_found){
+            throw new ServerError('User not found', 404)
+        }
+        if(!user_found.verified){
+            throw new ServerError('User found has no validated his email', 400)
+        }
+        const isSamePassword = await bcrypt.compare(password, user_found.password)
+        if(!isSamePassword){
+            throw new ServerError('The password is not correct', 400)
+        }
+        const authorization_token = jwt.sign(
+            {
+                id: user_found._id,
+                username: user_found.username,
+                email: user_found.email
+            },
+            ENVIROMENT.SECRET_KEY_JWT,
+            {expiresIn: '2h'}
+        )
+        return res.json({
+            ok: true,
+            status: 200,
+            message: 'Logged',
+            data: {
+                authorization_token
+            }
+        })
     } catch (error) {
         console.log("error al registrar", error);
 
