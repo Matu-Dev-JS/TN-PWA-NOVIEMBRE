@@ -48,7 +48,7 @@ export const registerController = async (req, res) => {
             </a>
             `
         })
-        return res.send(
+        return res.status(201).send(
             {
                 message: "user created",
                 status: 201,
@@ -59,14 +59,14 @@ export const registerController = async (req, res) => {
         console.log("error al registrar", error);
 
         if (error.status) {
-            return res.send({
+            return res.status(400).send({
                 ok: false,
                 status: error.status,
                 message: error.message
             });
         }
 
-        res.send({
+        res.status(500).send({
             status: 500,
             ok: false,
             message: "internal server error"
