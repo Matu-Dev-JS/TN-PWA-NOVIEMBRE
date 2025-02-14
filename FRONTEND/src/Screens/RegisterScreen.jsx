@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import ENVIROMENT from '../config/enviroment'
+import { ServerError } from '../utils/error.util'
+import { useForm } from '../hooks/useForm'
+import { useApiRequest } from '../hooks/useApiRequest'
 
 const RegisterScreen = () => {
     const formInitialState = {
@@ -7,48 +10,14 @@ const RegisterScreen = () => {
         email: '',
         password: ''
     }
-    const [formState, setFormState] = useState(formInitialState)
-    const handleChangeInput = (event) => {
-        const { name, value } = event.target
-        setFormState(
-            (prevFormState) => {
-                return { ...prevFormState, [name]: value }
-            }
-        )
-        //Esto esta mal! formState[event.target.name] = event.target.value
-    }
+    const { formState, handleChangeInput } = useForm(formInitialState)
+   
+    const {responseApiState, postRequest } = useApiRequest(ENVIROMENT.URL_API + '/api/auth/register')
 
-    const handleSubmitForm = async (event) =>{
+
+    const handleSubmitForm = async (event) => {
         event.preventDefault()
-
-        //Enviar el formulario (osea el estado) al backend
-        //Consulta HTTP 
-        //Fetch es una funcion que nos permite hacer consultas HTTP 
-        //Recibe la URL a consultar y un objeto de configuracion
-        //URL : String
-        //Objeto : Object {method, headers, body (solo si la consulta no es GET)}
-        const response = await fetch(
-            ENVIROMENT.URL_API + '/api/auth/register', 
-            {
-                method: 'POST',
-                headers: {
-                    "Content-Type": 'application/json'
-                },
-                body: JSON.stringify(formState)
-            }
-        )
-        const data = await response.json()
-        if(data.ok){
-            alert("Usuario registrado")
-        }
-        else{
-            if(data.status == 400){
-                alert(data.message)
-            }
-            else{
-                alert('Error, intentalo mas tarde!')
-            }
-        }
+        await postRequest(formState)
     }
 
 
@@ -89,7 +58,16 @@ const RegisterScreen = () => {
                         onChange={handleChangeInput}
                     />
                 </div>
-                <button type='submit' >Registrar</button>
+                {
+                    responseApiState.error && <span style={{color: 'red'}}>{responseApiState.error}</span>
+                }
+                {
+                    responseApiState.loading
+                        ? <span>Cargando</span>
+                        : <button type='submit' >Registrar</button>
+                }
+
+
             </form>
         </div>
     )
