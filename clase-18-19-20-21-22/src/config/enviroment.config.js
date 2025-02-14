@@ -10,7 +10,7 @@ const ENVIROMENT = {
     GMAIL_USERNAME: process.env.GMAIL_USERNAME,
     GMAIL_PASSWORD: process.env.GMAIL_PASSWORD,
     URL_BACKEND: process.env.URL_BACKEND || 'http://localhost:3000',
-    URL_FRONTEND: process.env.URL_FRONTEND ||  'http://locahost:5000'
+    URL_FRONTEND: process.env.URL_FRONTEND ||  'http://localhost:5173'
 }
 
 for(let key in ENVIROMENT){

@@ -150,3 +150,50 @@ export const loginController = async (req, res) => {
         });
     }
 }
+
+export const resetPasswordController = async (req, res) =>{
+    try{
+        const {email} = req.body
+        const user_found = await UserRepository.findUserByEmail(email)
+        if(!user_found){
+            throw new ServerError("User not found", 404)
+        }
+        if(!user_found.verified){
+            throw new ServerError("User email is not validated yet", 400)
+        }
+
+        const reset_token = jwt.sign({email, _id: user_found._id}, ENVIROMENT.SECRET_KEY_JWT, {expiresIn: '2h'})
+        await sendMail({
+            to: email, 
+            subject: "Reset your password",
+            html: `
+            <h1>Has solicitado resetar tu contraseña de no ser tu ignora este mail</h1>
+            <a href='${ENVIROMENT.URL_FRONTEND}/rewrite-password?reset_token=${reset_token}'>Click aqui para resetear</a>
+            `
+        })
+        res.json(
+            {
+                ok: true,
+                status: 200,
+                message: 'Reset mail sent'
+            }
+        )
+    }
+    catch (error) {
+        console.log("error al registrar", error);
+
+        if (error.status) {
+            return res.send({
+                ok: false,
+                status: error.status,
+                message: error.message
+            });
+        }
+
+        res.send({
+            status: 500,
+            ok: false,
+            message: "internal server error"
+        });
+    }
+}

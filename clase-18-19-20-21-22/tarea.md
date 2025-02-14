@@ -1,0 +1,2 @@
+-Integrar el frontend a la ruta de /api/auth/reset-password para poder solicitar un cambio de contraseña
+-Desarrollar una nueva pantalla en /rewrite-password en su frontend para solicitar una nueva contraseña (Esto no es necesario que se integre al backend ya que aun no esta desarrollado)
