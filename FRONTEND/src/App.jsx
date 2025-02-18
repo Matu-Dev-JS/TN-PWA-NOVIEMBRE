@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import LoginScreen from './Screens/LoginScreen'
 import RegisterScreen from './Screens/RegisterScreen'
+import ResetPasswordScreen from './Screens/ResetPasswordScreen'
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
         <Route path='/login' element={<LoginScreen/>}/>
         <Route path="/register" element={<RegisterScreen/>}/>
         <Route path='/' element={<LoginScreen/>}/>
-        
+        <Route path='/reset-password' element={<ResetPasswordScreen/>}/>
       </Routes>
     </div>
   )

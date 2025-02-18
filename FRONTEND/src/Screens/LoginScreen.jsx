@@ -2,6 +2,7 @@ import React from 'react'
 import { useForm } from '../hooks/useForm'
 import { useApiRequest } from '../hooks/useApiRequest'
 import ENVIROMENT from '../config/enviroment'
+import { Link } from 'react-router-dom'
 
 const LoginScreen = () => {
 	
@@ -46,6 +47,9 @@ const LoginScreen = () => {
 					? <span>Cargando</span>
 					: <button>Iniciar sesion</button>
 				}
+				<Link to="/reset-password">
+					Olvide mi contraseña
+				</Link>
 			</form>
 		</div>
 	)
