@@ -42,7 +42,7 @@ const ResetPasswordScreen = () => {
 					: (
                         responseApiState.data 
                         ? <span>Se te envio un mail con los pasos a seguir</span>
-                        : <button>RECUPERAR CONTRASEÑA</button>
+                        : <button>Restablecer contraseña</button>
                     )
 				}
                 <Link to={'/login'}>

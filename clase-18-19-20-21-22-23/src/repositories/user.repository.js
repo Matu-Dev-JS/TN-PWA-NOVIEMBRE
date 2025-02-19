@@ -17,7 +17,7 @@ class UserRepository {
             })
         }
         catch(error){
-            console.log(error)
+            
             if(error.code === 11000){
                 if(error.keyPattern.username){
                     throw new ServerError("Username already registered", 400)
@@ -27,6 +27,8 @@ class UserRepository {
                     throw new ServerError("Email already registered", 400)
                 }
             }
+            console.log('Error al crear el usuario', error)
+            
             throw error
         }
     }
