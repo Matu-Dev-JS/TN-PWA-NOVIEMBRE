@@ -49,6 +49,16 @@ class UserRepository {
     async findUserByEmail (email){
         return await User.findOne({[USER_PROPS.EMAIL]: email})
     }
+
+    async changeUserPassword(id, newPassword) {
+        const foundUser = await User.findById(id)
+        if(!foundUser) {
+            throw new ServerError('User not found', 404)
+        }
+        foundUser.password = newPassword
+        await foundUser.save()
+    }
+
 }
 
 

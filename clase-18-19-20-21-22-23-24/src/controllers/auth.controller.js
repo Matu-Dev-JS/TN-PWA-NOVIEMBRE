@@ -197,3 +197,39 @@ export const resetPasswordController = async (req, res) =>{
         });
     }
 }
+
+export const rewritePasswordController = async (req, res) => {
+    try {
+        const { password, reset_token } = req.body
+        const { _id } = jwt.verify(reset_token, ENVIROMENT.SECRET_KEY_JWT)
+
+        // Hashear la pwd
+        const newHashedPassword = await bcrypt.hash(password, 10)
+        await UserRepository.changeUserPassword(_id, newHashedPassword)
+        if('pepe123' === 'pepe123 '){
+            
+        }
+        
+        return res.json({
+            ok: true,
+            message: 'Password changed succesfully',
+            status: 200
+        })
+
+
+    } catch (err) {
+        console.log(err);
+        if (err.status) {
+            return res.send({
+                ok: false,
+                status: err.status,
+                message: err.message
+            })
+        }
+        return res.send({
+            message: "Internal server error",
+            status: 500,
+            ok: true
+        })
+    }
+}

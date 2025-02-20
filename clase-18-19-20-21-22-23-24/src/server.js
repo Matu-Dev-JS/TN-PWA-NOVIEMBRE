@@ -4,13 +4,13 @@ import authRouter from "./routes/auth.router.js";
 import mongoose from "./config/mongoDB.config.js";
 import { sendMail } from "./utils/mailer.utils.js";
 import cors from 'cors'
+import { verifyLuckyMiddleware } from "./middlewares/verifyLuckyMiddleware.js";
 
 const app = express()
 
 //Dehabilito la politica de cors
 //Si quieren un backend publico
 app.use(cors())
-
 //Si quieren que sea reservado para cierto dominio
 /* 
 app.use(cors(

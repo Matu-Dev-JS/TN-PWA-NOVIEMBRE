@@ -17,9 +17,11 @@ const RewritePasswordScreen = () => {
             if(!reset_token) {
                 navigate('/login')
             }
+        
         },
         []
     )
+    
 
     /* 
 	Forma nativa
@@ -39,13 +41,24 @@ const RewritePasswordScreen = () => {
 	}
 
 	const { formState, handleChangeInput } = useForm(initialFormState)
-	const { responseApiState, postRequest } = useApiRequest(ENVIROMENT.URL_API + '/api/auth/rewrite-password')
+	const { responseApiState, putRequest } = useApiRequest(ENVIROMENT.URL_API + '/api/auth/rewrite-password')
+
+    useEffect(
+        ()=>{
+            if(responseApiState.data) {
+                navigate('/login')
+            }
+        }, 
+        [responseApiState]
+    )
 
 	const handleSubmitForm = async (e) =>{
 		e.preventDefault()
         //                 Nueva pass                    Reset_token
-		await postRequest({password: formState.password, reset_token})
+		await putRequest({password: formState.password, reset_token})
 	}
+
+
     /* 
     Tarea:
 
