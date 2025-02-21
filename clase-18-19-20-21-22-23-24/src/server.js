@@ -5,8 +5,11 @@ import mongoose from "./config/mongoDB.config.js";
 import { sendMail } from "./utils/mailer.utils.js";
 import cors from 'cors'
 import { verifyLuckyMiddleware } from "./middlewares/verifyLuckyMiddleware.js";
+import { authMiddleware } from "./middlewares/authMiddleware.js";
 
 const app = express()
+
+
 
 //Dehabilito la politica de cors
 //Si quieren un backend publico
@@ -43,6 +46,12 @@ Probar hacer el registro con postman
 */
 
 app.use('/api/auth', authRouter)
+app.get('/api/test/comprar', authMiddleware, (req, res) =>{
+    console.log(req.user)
+    res.json({
+        message: 'Producto comprado'
+    })
+})
 
 app.listen(ENVIROMENT.PORT, () =>{
     console.log(`El servidor se esta ejecutando en http://localhost:${ENVIROMENT.PORT}`)

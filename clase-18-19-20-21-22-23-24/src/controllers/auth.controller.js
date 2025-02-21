@@ -103,6 +103,7 @@ export const verifyEmailController = async (req, res) => {
 
 export const loginController = async (req, res) => {
     try{    
+        
         const {email, password} = req.body
         const user_found = await UserRepository.findUserByEmail(email)
         if(!user_found){
@@ -117,7 +118,7 @@ export const loginController = async (req, res) => {
         }
         const authorization_token = jwt.sign(
             {
-                id: user_found._id,
+                _id: user_found._id,
                 username: user_found.username,
                 email: user_found.email
             },
