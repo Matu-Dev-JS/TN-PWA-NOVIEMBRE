@@ -12,7 +12,11 @@ export const useApiRequest = (url) =>{
 
     const postRequest = async (body) => {
         try {
-            setResponseApiState({ ...initialResponseApiState, loading: true })
+            setResponseApiState((prevState) => {
+                return {
+                    ...prevState, loading: true
+                } 
+            })
             const response = await fetch(
                 url,
                 {

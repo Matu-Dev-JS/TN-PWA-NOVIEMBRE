@@ -6,6 +6,7 @@ import { sendMail } from "./utils/mailer.utils.js";
 import cors from 'cors'
 import { verifyLuckyMiddleware } from "./middlewares/verifyLuckyMiddleware.js";
 import { authMiddleware } from "./middlewares/authMiddleware.js";
+import workspace_router from "./routes/workspace.router.js";
 
 const app = express()
 
@@ -46,6 +47,8 @@ Probar hacer el registro con postman
 */
 
 app.use('/api/auth', authRouter)
+app.use('/api/workspaces', workspace_router)
+
 app.get('/api/test/comprar', authMiddleware, (req, res) =>{
     console.log(req.user)
     res.json({

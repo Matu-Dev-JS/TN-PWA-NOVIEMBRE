@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useForm } from '../hooks/useForm'
 import { useApiRequest } from '../hooks/useApiRequest'
 import ENVIROMENT from '../config/enviroment'
@@ -13,11 +13,19 @@ const LoginScreen = () => {
 	}
 	const { formState, handleChangeInput } = useForm(initialFormState)
 	const { responseApiState, postRequest } = useApiRequest(ENVIROMENT.URL_API + '/api/auth/login')
+
+	useEffect(
+		()=>{
+			if(responseApiState.data) {
+				login(responseApiState.data.data.authorization_token)
+			}
+		},
+		//Cada vez que cambie mi estado de respuesta ejecutare el efecto
+		[responseApiState]	
+	)
 	const handleSubmitForm = async (e) =>{
 		e.preventDefault()
 		await postRequest(formState)
-		console.log(responseApiState)
-		login(responseApiState.data.data.authorization_token)
 	}
 	return (
 		<div>

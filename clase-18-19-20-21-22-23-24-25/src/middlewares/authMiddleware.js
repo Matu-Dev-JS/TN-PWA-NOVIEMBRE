@@ -17,14 +17,17 @@ export const authMiddleware = (request, response, next) =>{
         if(!authorization_token){
             throw new ServerError('No has proporcionado un token de authorizacion', 401)
         }
-
-        const user_info = jwt.verify(authorization_token, ENVIROMENT.SECRET_KEY_JWT)
-        
-        request.user = user_info
-        next()
+        try{
+            const user_info = jwt.verify(authorization_token, ENVIROMENT.SECRET_KEY_JWT)
+            request.user = user_info
+            next()
+        }
+        catch(error){
+            throw new ServerError('Token invalido o vencido', 400)
+        }
     }
     catch(error){
-        console.log("error al autentificar", error);
+        console.log("error al autentificar", error.message);
 
         if (error.status) {
             return response.json({
