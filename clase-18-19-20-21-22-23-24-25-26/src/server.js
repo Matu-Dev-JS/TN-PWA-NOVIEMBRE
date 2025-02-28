@@ -7,6 +7,7 @@ import cors from 'cors'
 import { verifyLuckyMiddleware } from "./middlewares/verifyLuckyMiddleware.js";
 import { authMiddleware } from "./middlewares/authMiddleware.js";
 import workspace_router from "./routes/workspace.router.js";
+import channelRouter from "./routes/channel.router.js";
 
 const app = express()
 
@@ -48,6 +49,7 @@ Probar hacer el registro con postman
 
 app.use('/api/auth', authRouter)
 app.use('/api/workspaces', workspace_router)
+app.use('/api/channels', channelRouter)
 
 app.get('/api/test/comprar', authMiddleware, (req, res) =>{
     console.log(req.user)

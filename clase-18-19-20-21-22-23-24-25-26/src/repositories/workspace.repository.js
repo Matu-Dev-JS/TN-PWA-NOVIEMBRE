@@ -25,6 +25,7 @@ class WorkspaceRepository {
         }
 
         //Que sea el dueño
+
         if(!workspace_found.owner.equals(owner_id)){
             throw new ServerError('You are not the owner of this workspace', 403)
         }
