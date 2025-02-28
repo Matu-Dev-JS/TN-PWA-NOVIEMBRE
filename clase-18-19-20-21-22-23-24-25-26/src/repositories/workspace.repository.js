@@ -3,6 +3,7 @@ import { ServerError } from "../utils/errors.utils.js";
 
 class WorkspaceRepository {
     async findWorkspaceById (id){
+        console.log(id)
         return await Workspace.findById(id)
     }
     async createWorkspace({name, owner_id}){
